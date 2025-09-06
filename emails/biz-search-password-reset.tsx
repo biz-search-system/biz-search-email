@@ -12,16 +12,16 @@ import {
   Text,
 } from "@react-email/components";
 
-interface BizSearchMagicLinkEmailProps {
+interface BizSearchPasswordResetEmailProps {
   email?: string;
-  magicLinkUrl?: string;
+  resetUrl?: string;
 }
 
-export const BizSearchMagicLinkEmail = ({
+export const BizSearchPasswordResetEmail = ({
   email = "{{ .Email }}",
-  magicLinkUrl = "{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next={{ .RedirectTo }}",
-}: BizSearchMagicLinkEmailProps) => {
-  const previewText = "BizSearchへのログインリンク";
+  resetUrl = "{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next={{ .RedirectTo }}",
+}: BizSearchPasswordResetEmailProps) => {
+  const previewText = "BizSearchパスワードリセットのご案内";
 
   return (
     <Html>
@@ -55,13 +55,13 @@ export const BizSearchMagicLinkEmail = ({
             <Section className="mt-[32px] mb-[32px] text-center">
               <Button
                 className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
-                href={magicLinkUrl}
+                href={resetUrl}
               >
                 パスワードをリセットする
               </Button>
             </Section>
             <Text className="text-[#666666] text-[12px] leading-[24px]">
-              このログインリンクは<span className="text-black">{email}</span>
+              このパスワードリセットリンクは<span className="text-black">{email}</span>
               様宛に送信されました。心当たりがない場合は、このメールを無視してください。
             </Text>
             <Text className="text-[#666666] text-[12px] leading-[24px]">
@@ -74,10 +74,10 @@ export const BizSearchMagicLinkEmail = ({
   );
 };
 
-BizSearchMagicLinkEmail.PreviewProps = {
+BizSearchPasswordResetEmail.PreviewProps = {
   email: "user@example.com",
-  magicLinkUrl:
-    "https://www.biz-search.tech/api/auth/confirm?token_hash=example&type=email",
-} as BizSearchMagicLinkEmailProps;
+  resetUrl:
+    "https://www.biz-search.tech/api/auth/confirm?token_hash=example&type=recovery",
+} as BizSearchPasswordResetEmailProps;
 
-export default BizSearchMagicLinkEmail;
+export default BizSearchPasswordResetEmail;
