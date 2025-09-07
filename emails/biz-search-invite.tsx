@@ -16,16 +16,18 @@ import {
 interface BizSearchInviteEmailProps {
   email?: string;
   inviterEmail?: string;
+  inviteUrl?: string;
 }
 
 export const BizSearchInviteEmail = ({
   email = "{{ .Email }}",
   inviterEmail = "{{ .Data.added_by }}",
+  inviteUrl = "{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=email&next={{ .RedirectTo }}",
 }: BizSearchInviteEmailProps) => {
   const previewText = "BizSearchへの招待";
 
   return (
-    <Html>
+    <Html lang="ja">
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
@@ -61,7 +63,7 @@ export const BizSearchInviteEmail = ({
             <Section className="mt-[32px] mb-[32px] text-center">
               <Button
                 className="rounded bg-[#000000] px-5 py-3 text-center font-semibold text-[12px] text-white no-underline"
-                href="{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email&amp;next={{ .RedirectTo }}"
+                href={inviteUrl}
               >
                 アカウントを作成する
               </Button>
@@ -80,6 +82,8 @@ export const BizSearchInviteEmail = ({
 BizSearchInviteEmail.PreviewProps = {
   email: "user@example.com",
   inviterEmail: "admin@bizsearch.com",
+  inviteUrl:
+    "https://www.biz-search.tech/api/auth/confirm?token_hash=example&type=email",
 } as BizSearchInviteEmailProps;
 
 export default BizSearchInviteEmail;

@@ -19,12 +19,12 @@ interface BizSearchPasswordResetEmailProps {
 
 export const BizSearchPasswordResetEmail = ({
   email = "{{ .Email }}",
-  resetUrl = "{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=recovery&next={{ .RedirectTo }}",
+  resetUrl = "{{ .SiteURL }}/api/auth/recovery?token_hash={{ .TokenHash }}&type=recovery&next={{ .RedirectTo }}",
 }: BizSearchPasswordResetEmailProps) => {
   const previewText = "BizSearchパスワードリセットのご案内";
 
   return (
-    <Html>
+    <Html lang="ja">
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
@@ -61,7 +61,8 @@ export const BizSearchPasswordResetEmail = ({
               </Button>
             </Section>
             <Text className="text-[#666666] text-[12px] leading-[24px]">
-              このパスワードリセットリンクは<span className="text-black">{email}</span>
+              このパスワードリセットリンクは
+              <span className="text-black">{email}</span>
               様宛に送信されました。心当たりがない場合は、このメールを無視してください。
             </Text>
             <Text className="text-[#666666] text-[12px] leading-[24px]">

@@ -19,12 +19,12 @@ interface BizSearchMagicLinkEmailProps {
 
 export const BizSearchMagicLinkEmail = ({
   email = "{{ .Email }}",
-  magicLinkUrl = "{{ .SiteURL }}/api/auth/confirm?token_hash={{ .TokenHash }}&type=email&next={{ .RedirectTo }}",
+  magicLinkUrl = "{{ .SiteURL }}/api/auth/invite?token_hash={{ .TokenHash }}&type=email&next={{ .RedirectTo }}",
 }: BizSearchMagicLinkEmailProps) => {
   const previewText = "BizSearchへのログインリンク";
 
   return (
-    <Html>
+    <Html lang="ja">
       <Head />
       <Preview>{previewText}</Preview>
       <Tailwind>
